@@ -6,8 +6,9 @@ const logger = require('morgan');
 const layouts = require("express-ejs-layouts");
 const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
-const weatherRouter = require('./routes/weather');
 const transactionsRouter = require('./routes/transactions');
+const weatherRouter = require('./routes/weather');
+
 
 const User = require('./models/User');
 
