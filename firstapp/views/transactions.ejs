@@ -1,3 +1,7 @@
-<% include ../layouts/header %>
-<h1>Transactions Page</h1>
-<p>Welcome to the Transactions page!</p>
+<%- include('layout', { title: 'Transactions', content: content }) %>
+
+<% const content = `
+  <h1>Transactions</h1>
+  <p>Welcome to the Transactions page!</p>
+  <a href="/">Back to Home</a>
+` %>
