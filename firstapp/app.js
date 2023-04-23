@@ -11,7 +11,7 @@ const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const transactionsRouter = require('./routes/transactions');
 const weatherRouter = require('./routes/weather');
-
+const db = require('./database');
 
 const User = require('./models/User');
 
@@ -68,6 +68,8 @@ function isLoggedIn(req, res, next) {
 /* creating the app */
 /* **************************************** */
 var app = express();
+
+app.use(express.urlencoded({ extended: false })); //NOT SURE IF CORRECT
 
 app.use(session({
   secret: 'This is a secret',
