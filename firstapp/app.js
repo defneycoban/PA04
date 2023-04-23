@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -89,13 +92,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-
-
 app.use(pw_auth_router)
-
 app.use(layouts);
+app.use(toDoRouter);
+app.use(transactionsRouter); //ADDED
+app.use(weatherRouter);
 
 app.get('/', (req,res,next) => {
   res.render('index');
@@ -108,9 +109,6 @@ app.get('/about',
   }
 )
 
-app.use(toDoRouter);
-app.use(transactionsRouter); //ADDED
-app.use(weatherRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
