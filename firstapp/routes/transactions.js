@@ -14,11 +14,20 @@ isLoggedIn = (req,res,next) => {
 
 // Normalize the formatting of dates
 function normalizeDate(date) {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
+   const year = date.getFullYear();
+   const month = (date.getMonth() + 1).toString().padStart(2, "0");
+   const day = date.getDate().toString().padStart(2, "0");
+   return `${year}-${month}-${day}`;
+ }
+
+// router.get('/', isLoggedIn, async (req, res) => {
+//   let items = await Transactions.find({ userId: req.user._id });
+
+//   res.render('transactions', {
+//       items: items,
+//       locals: { normalizeDate: normalizeDate } // Pass the normalizeDate function to the view
+//   });
+// });
 
 //Get all transcations
 router.get('/transactions/', isLoggedIn, async (req, res, next) => {
@@ -56,12 +65,12 @@ router.get('/transactions/', isLoggedIn, async (req, res, next) => {
     .sort(data)
     .collation({ locale: "en", strength: 2 });
 
-  res.render("transactions", { items });
+    res.render("transactions", { items, normalizeDate });
 });
 
 // Create a new transaction
-router.post("/transaction", isLoggedIn, async (req, res, next) => {
-        const t = new Transaction(
+router.post("/transactions", isLoggedIn, async (req, res, next) => {
+        const t = new Transactions(
             {description: req.body.description,
             amount: req.body.amount,
             category: req.body.category,
@@ -74,14 +83,14 @@ router.post("/transaction", isLoggedIn, async (req, res, next) => {
 
 //Delete a transaction
 router.get('/transactions/delete/:itemID', isLoggedIn, async (req, res, next) => {
-  await Transaction.deleteOne({_id:req.params.itemID});
+  await Transactions.deleteOne({_id:req.params.itemID});
   res.redirect('/transactions');
 });
 
 //Edit a transaction
 router.get("/transactions/edit/:itemId", isLoggedIn, async (req, res, next) => {
     console.log("inside /transactions/edit/:itemId");
-    const tr = await Transaction.findById(req.params.itemId);
+    const tr = await Transactions.findById(req.params.itemId);
     res.locals.item = tr;
     res.render("edit", { normalizeDate });
 });
@@ -90,7 +99,7 @@ router.get("/transactions/edit/:itemId", isLoggedIn, async (req, res, next) => {
 router.post("/transactions/updateTransaction", isLoggedIn, async (req, res, next) => {
     const { itemId, description, amount, category, date } = req.body;
     //console.log("inside /transactions/updateTransaction");
-    await Transaction.findOneAndUpdate(
+    await Transactions.findOneAndUpdate(
       { _id: itemId },
       { $set: { description, amount, category, date } }
     );
@@ -98,10 +107,10 @@ router.post("/transactions/updateTransaction", isLoggedIn, async (req, res, next
   }
 );
 
-router.get('/transaction/groupByCategory',
+router.get('/transactions/groupByCategory',
   isLoggedIn,
   async (req, res, next) => {
-    console.log("inside /transaction/groupByCategory")
+    console.log("inside /transactions/groupByCategory")
     const userId = req.user._id
       let results =
             await transactionItem.aggregate(

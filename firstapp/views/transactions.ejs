@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-code.js"></script>
+
+  </head>
 <body>
     <div class="container">
         <h1>Transactions</h1>
@@ -43,6 +45,18 @@
                 <% }) %>
             </tbody>
         </table>
+        <!-- New form to add a transaction -->
+        <form method="post" action="/transactions">
+          Description: <input type="text" name="description">
+          <br>
+          Amount: <input type="number" name="amount">
+          <br>
+          Category: <input type="text" name="category">
+          <br>
+          Date: <input type="date" name="date">
+          <br>
+          <input type="submit" value="Add Transaction">
+      </form>
     </div>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit-code.js"></script>
 </body>
