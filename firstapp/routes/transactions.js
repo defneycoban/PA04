@@ -65,6 +65,7 @@ router.get('/transactions/', isLoggedIn, async (req, res, next) => {
     .sort(data)
     .collation({ locale: "en", strength: 2 });
 
+    //console.log(items); // Log the items object
     res.render("transactions", { items, normalizeDate });
 });
 
@@ -77,6 +78,7 @@ router.post("/transactions", isLoggedIn, async (req, res, next) => {
             date: req.body.date,
             userId: req.user._id,
         });
+        console.log(req.body);
         await t.save();
         res.redirect("/transactions");
 });
@@ -113,7 +115,7 @@ router.get('/transactions/groupByCategory',
     console.log("inside /transactions/groupByCategory")
     const userId = req.user._id
       let results =
-            await transactionItem.aggregate(
+            await transactionItem.aggregate( //gonna have to change that later
                 [ 
                   {$match:{
                     userId: userId}},
