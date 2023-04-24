@@ -109,9 +109,7 @@ router.post("/transactions/updateTransaction", isLoggedIn, async (req, res, next
   }
 );
 
-router.get('/transactions/groupByCategory',
-  isLoggedIn,
-  async (req, res, next) => {
+router.get('/transactions/groupByCategory', isLoggedIn, async (req, res, next) => {
     console.log("inside /transactions/groupByCategory")
     const userId = req.user._id
       let results =
