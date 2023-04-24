@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Transaction</title>
+  </head>
+  <body>
+    <h1>Edit Transaction</h1>
+    <form method="POST" action="/transactions/updateTransaction">
+      <input type="hidden" name="itemId" value="<%= item._id %>">
+      <label for="description">Description:</label>
+      <input type="text" name="description" value="<%= item.description %>">
+      <br>
+      <label for="amount">Amount:</label>
+      <input type="number" name="amount" value="<%= item.amount %>">
+      <br>
+      <label for="category">Category:</label>
+      <input type="text" name="category" value="<%= item.category %>">
+      <br>
+      <label for="date">Date:</label>
+      <input type="date" name="date" value="<%= normalizeDate(new Date(item.date)) %>">
+      <br>
+      <input type="submit" value="Save">
+    </form>
+  </body>
+</html>

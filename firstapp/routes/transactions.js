@@ -94,7 +94,7 @@ router.get("/transactions/edit/:itemId", isLoggedIn, async (req, res, next) => {
     console.log("inside /transactions/edit/:itemId");
     const tr = await Transactions.findById(req.params.itemId);
     res.locals.item = tr;
-    res.render("edit", { normalizeDate });
+    res.render("editTrans", { normalizeDate });
 });
 
 //Update a transaction
@@ -115,7 +115,7 @@ router.get('/transactions/groupByCategory',
     console.log("inside /transactions/groupByCategory")
     const userId = req.user._id
       let results =
-            await transactionItem.aggregate( //gonna have to change that later
+            await Transactions.aggregate( //gonna have to change that later
                 [ 
                   {$match:{
                     userId: userId}},

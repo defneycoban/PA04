@@ -11,8 +11,31 @@
 
   </head>
 <body>
-    <div class="container">
-        <h1>Transactions</h1>
+  <h1> Transactions for <%=username%>@me.com </h1>
+  <p> Here is your list of transactions! </p>
+  <!-- <ul class="choose-sorting">
+    <table class="sort">
+      <tr>
+        <td>
+        <a class="btn btn-primary" href="/transactions/groupbyCategory" role="button">group by category</a>
+        </td>
+        <td>
+        <a class="btn btn-primary" href="/transactions?sortBy=category&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by category</a>
+        </td>
+        <td>
+        <a class="btn btn-primary" href="/transaction?sortBy=amount&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by amount</a>
+        </td>
+        <td>
+        <a class="btn btn-primary" href="/transaction?sortBy=item&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by description</a>
+        </td>
+        <td>
+        <a class="btn btn-primary" href="/transaction?sortBy=occurredAt&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by date</a>
+        </td>
+      </tr>
+    </table>
+    </ul> -->
+
+    <div class="table-container">
         <table class="table table-striped">
             <thead>
                 <tr>
