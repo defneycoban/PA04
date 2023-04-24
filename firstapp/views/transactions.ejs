@@ -1,53 +1,49 @@
-
-<h1> Transactions for <%= user.username %> </h1>
-
-  <div class="row">
-    <div class="col">
-      <p> Here is your list of things to do! </p>
-    
-      <ul class="list-group">
-        <% items.forEach(item => { %>
-            <li class="list-group-item">
-                <span class="">
-                    <a href="/transactions/delete/<%=item._id %>">
-                      <i class="bi bi-trash"></i>
-                    </a>
-                </span>
-                <span class="mx-5">
-                  <%= item.item %>
-                  <%= item.amount %>
-                  <%= item.category %>
-                  <%= item.date %>
-                </span>
-                
-                <a 
-                   href="/transactions/edit/<%=item._id %>">
-                  <i class="bi bi-pencil-square"></i>
-              </a>
-                  
-            </li>
-            <br>
-        <% }) %>
-
-        <form method="post" action="todo">
-            new item: <input type="text" name="item">
-            <br>
-            priority: <select name="priority">
-              <option>1 </option>
-              <option>2 </option>
-              <option>3 </option>
-              <option>4 </option>
-              <option>5 </option>
-            </select>
-            <br>
-            <input type="submit" value="store">
-        </form>
-      </div>
-      <div class="col">
-        <h2> Summary of Site Usage</h2>
-        <p>
-          <a  class="btn btn-lg btn-primary"
-              href="/transactions/byUser">Show todo counts for all users</a></p>
-      </div> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Transactions</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% items.forEach((item) => { %>
+                    <tr>
+                        <td><%= item.description %></td>
+                        <td><%= item.amount %></td>
+                        <td><%= item.category %></td>
+                        <td><%= normalizeDate(new Date(item.date)) %></td>
+                        <td>
+                            <a href="/transactions/delete/<%= item._id %>">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/transactions/edit/<%= item._id %>">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
     </div>
-</div>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-code.js"></script>
+</body>
+</html>
