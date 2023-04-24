@@ -1,36 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const Transaction = require('../models/Transactions');
+'use strict';
+const mongoose = require( 'mongoose' );
+const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
-// Get all transactions
-router.get('/transactions', async function(req, res, next) {
-  try {
-    const transactions = await Transaction.find({});
-    res.render('transactions', { transactions });
-  } catch (err) {
-    next(err);
-  }
-});
+var toDoItemSchema = Schema( {
+  item: String,
+  amount: Number,
+  category: String,
+  date: Date,
+  userId: {type:ObjectId, ref:'user' }
+} );
 
-// Create a new transaction
-router.post('/transactions', async function(req, res, next) {
-  try {
-    const newTransaction = new Transaction(req.body);
-    await newTransaction.save();
-    res.redirect('/transactions');
-  } catch (err) {
-    next(err);
-  }
-});
-
-// Delete a transaction
-router.delete('/transactions/:id', async function(req, res, next) {
-  try {
-    await Transaction.findByIdAndDelete(req.params.id);
-    res.redirect('/transactions');
-  } catch (err) {
-    next(err);
-  }
-});
-
-module.exports = router;
+module.exports = mongoose.model( 'Transactions', toDoItemSchema );

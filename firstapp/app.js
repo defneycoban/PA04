@@ -11,9 +11,10 @@ const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const transactionsRouter = require('./routes/transactions');
 const weatherRouter = require('./routes/weather');
-const db = require('./database');
+const dbConnection = require('./database');
 
 const User = require('./models/User');
+const Transaction = require('./models/Transactions'); //Added
 
 /* **************************************** */
 /*  Connecting to a Mongo Database Server   */
@@ -97,7 +98,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(pw_auth_router)
 app.use(layouts);
 app.use(toDoRouter);
-app.use(transactionsRouter); //ADDED
+app.use(transactionsRouter);
 app.use(weatherRouter);
 
 app.get('/', (req,res,next) => {
@@ -111,6 +112,18 @@ app.get('/about',
   }
 )
 
+// Delete transaction by id
+//app.delete('/transactions/:id', isLoggedIn, async (req, res, next) => {
+  //try {
+    //const transactionId = req.params.id;
+    //const deletedTransaction = await Transaction.findByIdAndDelete(transactionId);
+    //res.send(deletedTransaction);
+    //res.redirect('/transactions');
+  //} catch (error) {
+    //console.log(error);
+    //res.status(500).send('Internal Server Error');
+  //}
+//});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -129,3 +142,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
