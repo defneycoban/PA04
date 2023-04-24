@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ToDoItem = require('../models/Transactions')
+const Transactions = require('../models/Transactions')
 const User = require('../models/User')
 
 
@@ -56,7 +56,7 @@ router.get('/transactions/', isLoggedIn, async (req, res, next) => {
     .sort(data)
     .collation({ locale: "en", strength: 2 });
 
-  res.render("transactionslist", { items });
+  res.render("transactions", { items });
 });
 
 // Create a new transaction
