@@ -109,22 +109,40 @@ router.post("/transactions/updateTransaction", isLoggedIn, async (req, res, next
   }
 );
 
+// router.get('/transactions/groupByCategory', isLoggedIn, async (req, res, next) => {
+//     console.log("inside /transactions/groupByCategory")
+//     const userId = req.user._id
+//       let results =
+//             await Transactions.aggregate( //gonna have to change that later
+//                 [ 
+//                   {$match:{
+//                     userId: userId}},
+//                   {$group:{
+//                     _id:'$category',
+//                     total:{$sum:1}
+//                     }},
+//                   {$sort:{total:-1}},              
+//                 ])
+//         res.render('groupByCategory', {results})
+//       });
+
 router.get('/transactions/groupByCategory', isLoggedIn, async (req, res, next) => {
-    console.log("inside /transactions/groupByCategory")
-    const userId = req.user._id
-      let results =
-            await Transactions.aggregate( //gonna have to change that later
-                [ 
-                  {$match:{
-                    userId: userId}},
-                  {$group:{
-                    _id:'$category',
-                    total:{$sum:1}
-                    }},
-                  {$sort:{total:-1}},              
-                ])
-        res.render('groupByCategory', {results})
-      });
+  console.log("inside /transactions/groupByCategory");
+  const userId = req.user._id;
+  let results = await Transactions.aggregate([
+    { $match: { userId: userId } },
+    {
+      $group: {
+        _id: '$category',
+        count: { $sum: 1 },
+        amount: { $sum: '$amount' }
+      }
+    },
+    { $sort: { amount: -1 } }
+  ]);
+  res.render('groupByCategory', { results });
+});
+
 
 // Delete a transaction
 // router.delete('/transactions/:id', isLoggedIn, async (req, res, next) => {

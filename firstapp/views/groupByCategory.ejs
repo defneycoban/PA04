@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group By Category</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="table-container">
+    <h1> Transactions for <%=username%>@me.com </h1>
+  <p> Here is your list of transactions! </p>
+  <ul>
+    <li><a href="/transactions">transactions table</a></li>
+  </ul>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>category</th>
+          <th>amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% results.forEach((result) => { %>
+          <tr>
+            <td><%= result._id %></td>
+            <td><%= result.amount %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

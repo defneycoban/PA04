@@ -40,16 +40,19 @@
             <thead>
               <tr>
                 <td>
-                  <a class="btn btn-primary" href="/transactions/groupbyCategory" role="button">group by category</a>
-                </td>
-                <td>
-                  <a class="btn btn-primary" href="/transaction?sortBy=amount&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by amount</a>
+                  <a class="btn btn-primary" href="/transactions/groupByCategory" role="button">group by category</a>
                 </td>
                 <td>
                   <a class="btn btn-primary" href="/transactions?sortBy=category&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by category</a>
                 </td>
                 <td>
-                  <a class="btn btn-primary" href="/transaction?sortBy=occurredAt&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by date</a>
+                  <a class="btn btn-primary" href="/transactions?sortBy=amount&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by amount</a>
+                </td>
+                <td>
+                  <a class="btn btn-primary" href="/transactions?sortBy=description&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by description</a>
+                </td>
+                <td>
+                  <a class="btn btn-primary" href="/transactions?sortBy=date&sortOrder=<%= sortOrder = 'asc'%>" role="button">sort by date</a>
                 </td>
                 <td></td>
                 <td></td>
